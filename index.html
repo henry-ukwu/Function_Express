@@ -1,0 +1,59 @@
+<!-- TASK 2 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number Check</title>
+    <script>
+      // Function to check if the number is greater than, less than, or equal to zero
+      function checkNumber() {
+        // Get number from the user
+        let number = prompt("Enter a number:");
+
+        // Convert the prompt result to a number especially in case it's a string
+        number = Number(number);
+
+        // Use if-else to check the number
+        if (number > 0) {
+          alert(1); // If the number is greater than zero
+        } else if (number < 0) {
+          alert(-1); // If the number is less than zero
+        } else {
+          alert(0); // If the number is equal to zero
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Number Check</h1>
+    <button onclick="checkNumber()">Click to Enter a Number</button>
+  </body>
+</html> -->
+
+<!-- 
+// TASK 1
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask for Name</title>
+    <script>
+      function askForName() {
+        let name = prompt("Please enter your name:");
+        // If the user cancels (name is null)
+        if (name === null || name === "") {
+          alert("You didn't enter a name."); // show a different message
+        } else {
+          // Display the entered name using an alert box
+          alert(`Hello, ${name}!`);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Welcome! This is a Name Prompt Page</h1>
+    <button onclick="askForName()">Click to Enter Your Name</button>
+  </body>
+</html>
