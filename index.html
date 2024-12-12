@@ -1,11 +1,478 @@
-<!-- TASK 2 -->
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Upload Portal</title>
+  <script>
+    let loggedInStudent = null;
+
+    function onSignIn() {
+      // Assuming user has signed in
+      const studentName = "Student Name"; // Replace with actual name from your authentication system
+
+      loggedInStudent = {
+        name: studentName,
+      };
+
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("upload-section").style.display = "block";
+      document.getElementById("student-name").textContent = loggedInStudent.name;
+    }
+
+    function signOut() {
+      alert("You have been signed out.");
+      document.getElementById("login-section").style.display = "block";
+      document.getElementById("upload-section").style.display = "none";
+    }
+
+    function uploadFile(event) {
+      const fileInput = document.getElementById("file-input");
+      const assignmentName = document.getElementById("assignment-name").value;
+
+      if (!fileInput.files.length) {
+        alert("Please select a file to upload.");
+        return;
+      }
+
+      if (!assignmentName) {
+        alert("Please enter the assignment name.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+
+      // Azure Blob Storage upload logic goes here (assuming it is implemented on the backend)
+      alert(`Uploading ${file.name} for assignment: ${assignmentName} to Azure Blob Storage...`);
+
+      // Simulate successful upload
+      const uploadedFilesList = document.getElementById("uploaded-files-list");
+      const listItem = document.createElement("li");
+      listItem.textContent = `${file.name} (Assignment: ${assignmentName})`;
+      uploadedFilesList.appendChild(listItem);
+
+      alert("File uploaded successfully!");
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h1, h2, h3 {
+      color: #333;
+    }
+
+    #upload-section {
+      display: none;
+    }
+
+    #login-section {
+      text-align: center;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    input[type="file"], input[type="text"] {
+      margin-top: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    input[type="radio"] {
+      margin: 10px 0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      background-color: #f1f1f1;
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login-section">
+      <h1>Login</h1>
+      <button onclick="onSignIn()">Login with Your Account</button>
+    </div>
+
+    <div id="upload-section">
+      <h1>Welcome, <span id="student-name"></span></h1>
+      <button onclick="signOut()">Sign Out</button>
+
+      <h2>Upload Your File</h2>
+
+      <!-- Input for Assignment Name -->
+      <label for="assignment-name">Assignment Name:</label>
+      <input type="text" id="assignment-name" placeholder="Enter the assignment name" />
+
+      <input type="file" id="file-input" />
+
+      <h3>Select Upload Destination:</h3>
+      <label>
+        <input type="radio" name="upload-option" value="azure-blob" checked />
+        Azure Blob Storage
+      </label>
+
+      <button onclick="uploadFile()">Upload</button>
+
+      <h3>Uploaded Files</h3>
+      <ul id="uploaded-files-list"></ul>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- TASK 5 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Upload Portal</title>
+  <script>
+    let loggedInStudent = null;
+
+    function onSignIn() {
+      // Assuming user has signed in
+      const studentName = "Student Name"; // Replace with actual name from your authentication system
+
+      loggedInStudent = {
+        name: studentName,
+      };
+
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("upload-section").style.display = "block";
+      document.getElementById("student-name").textContent = loggedInStudent.name;
+    }
+
+    function signOut() {
+      alert("You have been signed out.");
+      document.getElementById("login-section").style.display = "block";
+      document.getElementById("upload-section").style.display = "none";
+    }
+
+    function uploadFile(event) {
+      const fileInput = document.getElementById("file-input");
+
+      if (!fileInput.files.length) {
+        alert("Please select a file to upload.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      
+      // Azure Blob Storage upload logic goes here (assuming it is implemented on the backend)
+      alert(`Uploading ${file.name} to Azure Blob Storage...`);
+
+      // Simulate successful upload
+      const uploadedFilesList = document.getElementById("uploaded-files-list");
+      const listItem = document.createElement("li");
+      listItem.textContent = file.name;
+      uploadedFilesList.appendChild(listItem);
+
+      alert("File uploaded successfully!");
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h1, h2, h3 {
+      color: #333;
+    }
+
+    #upload-section {
+      display: none;
+    }
+
+    #login-section {
+      text-align: center;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    input[type="file"] {
+      margin-top: 15px;
+    }
+
+    input[type="radio"] {
+      margin: 10px 0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      background-color: #f1f1f1;
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login-section">
+      <h1>Login</h1>
+      <button onclick="onSignIn()">Login with Your Account</button>
+    </div>
+
+    <div id="upload-section">
+      <h1>Welcome, <span id="student-name"></span></h1>
+      <button onclick="signOut()">Sign Out</button>
+
+      <h2>Upload Your File</h2>
+      <input type="file" id="file-input" />
+
+      <h3>Select Upload Destination:</h3>
+      <label>
+        <input type="radio" name="upload-option" value="azure-blob" checked />
+        Azure Blob Storage
+      </label>
+
+      <button onclick="uploadFile()">Upload</button>
+
+      <h3>Uploaded Files</h3>
+      <ul id="uploaded-files-list"></ul>
+    </div>
+  </div>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+<!-- TASK 4 -->
+    <!-- // Google Sign-In client ID
+    const CLIENT_ID = '';
+
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Upload Portal</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/azure-storage-blob/12.12.0/azure-storage.blob.min.js"></script>
+  <script>
+    const CLIENT_ID = '1002147164393-69bsrdsqf7nr6k0lf1skpaokhih0gu4v.apps.googleusercontent.com';
+    const AZURE_ACCOUNT_NAME = '<YOUR_STORAGE_ACCOUNT_NAME>';
+    const AZURE_SAS_TOKEN = '<YOUR_SAS_TOKEN>'; // Replace with your SAS token
+
+    let loggedInStudent = null;
+
+    function onSignIn(googleUser) {
+      const profile = googleUser.getBasicProfile();
+      const email = profile.getEmail();
+
+      if (!email.endsWith("@amsterdam.tech")) {
+        alert("Please log in with your @amsterdam.tech email.");
+        signOut();
+        return;
+      }
+
+      loggedInStudent = {
+        name: profile.getName(),
+        email: email,
+      };
+
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("upload-section").style.display = "block";
+      document.getElementById("student-name").textContent = loggedInStudent.name;
+    }
+
+    function signOut() {
+      const auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(() => {
+        alert("You have been signed out.");
+        document.getElementById("login-section").style.display = "block";
+        document.getElementById("upload-section").style.display = "none";
+      });
+    }
+
+    async function uploadToAzureBlob(file) {
+      const containerName = loggedInStudent.email.split('@')[0]; // Use email prefix as container name
+      const blobServiceClient = new AzureStorageBlob.BlobServiceClient(
+        `https://${AZURE_ACCOUNT_NAME}.blob.core.windows.net?${AZURE_SAS_TOKEN}`
+      );
+
+      const containerClient = blobServiceClient.getContainerClient(containerName);
+
+      try {
+        const exists = await containerClient.exists();
+        if (!exists) {
+          await containerClient.create();
+          console.log(`Container ${containerName} created.`);
+        }
+
+        const blockBlobClient = containerClient.getBlockBlobClient(file.name);
+        await blockBlobClient.uploadBrowserData(file);
+
+        const uploadedFilesList = document.getElementById("uploaded-files-list");
+        const listItem = document.createElement("li");
+        listItem.textContent = file.name;
+        uploadedFilesList.appendChild(listItem);
+
+        alert("File uploaded successfully to Azure Blob Storage.");
+      } catch (error) {
+        console.error("Error uploading file to Azure Blob Storage:", error);
+        alert("Failed to upload file. Please try again.");
+      }
+    }
+
+    function uploadFile() {
+      const fileInput = document.getElementById("file-input");
+
+      if (!fileInput.files.length) {
+        alert("Please select a file to upload.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      uploadToAzureBlob(file);
+    }
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    #upload-section {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login-section">
+      <h1>Login</h1>
+      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    </div>
+
+    <div id="upload-section">
+      <h1>Welcome, <span id="student-name"></span></h1>
+      <button onclick="signOut()">Sign Out</button>
+
+      <h2>Upload Your File</h2>
+      <input type="file" id="file-input" />
+      <button onclick="uploadFile()">Upload</button>
+
+      <h3>Uploaded Files</h3>
+      <ul id="uploaded-files-list"></ul>
+    </div>
+  </div>
+</body>
+</html> -->
+
+
+<!-- TASK 2 -->
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Number Check</title>
     <script>
+      alert("welcome to this javascript prompt test code - created by alert()");
+      document.write("This is a line of the content is created by document.write()");
+
+
       // Function to check if the number is greater than, less than, or equal to zero
       function checkNumber() {
         // Get number from the user
@@ -29,7 +496,7 @@
     <h1>Number Check</h1>
     <button onclick="checkNumber()">Click to Enter a Number</button>
   </body>
-</html> -->
+</html>  -->
 
 <!-- 
 // TASK 1
